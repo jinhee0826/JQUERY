@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이펙트</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <style>
+        .my-box{
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            border: 3px solid orange;
+        }
+
+        .my-position{
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button id="title-btn">효과</button>
+    <h1 id="title">안녕하세요</h1>
+
+    <!--실습-->
+    <button id="toggle-btn">토글 버튼</button>
+    <div id="toggleE" style="display: none;"> <!--처음부터 숨기고 싶다면 1-->
+        <p>이 요소는 div안의 p요소입니다</p>
+        <p>toggle을 통해 효과를 주었습니다</p>
+    </div>
+    
+    <!--페이드 효과 실습-->
+    <button id="fade-btn">버튼에 마우스를 올리면 상자가 나타나고 사라집니다</button>
+    <div class="my-box"></div>
+
+    <!--슬라이드 효과 실습-->
+    <h1>고정된 div 나타내기</h1>
+    <button id="slide-btn">슬라이드로 나타나기</button>
+    <div class="my-box my-position"></div>
+
+    
+    <script>
+        $("#title-btn").on("click",function(){
+            $("#title").toggle("fast");
+        });
+
+        // 실습  = 나
+        /*
+        $("#toggleE").hide();
+        $("#toggle-btn").on("click", function(){
+            $("#toggleE").toggle("fast");
+        })
+        */
+        
+        // 옆에 자식으로 찾기 
+        // $("#toggle-btn+").hide() ;//바로 뒤에 있는 형제(div)적용 처음부터 숨기고싶음2
+        // 근데 2번은 코드 짤 때 헷갈리기 때문에 비추천
+        $("#toggle-btn").on("click",function(){
+            $(this).next().toggle("slow");
+        })
+
+        // 페이드 효과 실습 - 나 & 썜
+        $("#fade-btn").on("mouseenter mouseleave",function(){
+            $(this).next().fadeToggle("fast");
+        })
+
+        // 슬라이드 효과 실습
+        $("#slide-btn").on("click", function(){
+            $(this).next().slideToggle("slow");
+        })
+
+    </script>
+</body>
+</html>
